@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400');
+
+* {
+  font-family: Montserrat;
+  color: white;
+  transition: .1s;
+	-webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+html {
+  background: #eb5030;
+  font-size: .8rem;
+}
+body, div, button, .finger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+body {
+  background: transparent;
+  margin: 0;
+  min-height: 100vh;
+}
+.row {
+  flex-direction: row;
+}
+#circle {
+  margin: 20px;
+  height: 50vmin;
+  width: 50vmin;
+  border-radius: 50vmin;
+  border: 1px solid rgba(255, 255, 255, .5);
+}
+#time-left {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  font-size: 10vmin;
+  font-weight: 100;
+}
+#m {
+  text-align: right;
+}
+button, 
+button:active, 
+button:focus {
+  border: none;
+  background: none;
+  outline: none;
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  font-size: 1.8rem;
+  font-weight: 100;
+}
+button::-moz-focus-inner {
+  border: 0;
+}
+button:active {
+  background: rgba(255, 255, 255, .5);
+}
+.finger {
+  height: 50px;
+}
+#break-length, #focus-length {
+  width: 50px;
+}
+p {
+  margin: 0;
+  padding: 0;
+}
+.focus {
+  background: #3b3b3b;
+}
+html, .focus {
+  transition: 1s;
+}
+html, button {
+  text-transform: uppercase;
+}
+.hide {
+  opacity: 0;
+  z-index: -9;
+  transition: .5s;
+}
+#reset {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 0;
+}
