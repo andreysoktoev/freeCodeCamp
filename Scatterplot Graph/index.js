@@ -1,6 +1,6 @@
-const w = 640;
-const h = 320;
-const p = 50;
+const w = 640,
+      h = 320,
+      p = 50;
 
 const svg = d3
   .select('body')
@@ -13,12 +13,15 @@ let tooltip = d3
   .append('div')
   .attr('id', 'tooltip');
 
+let parseTime = d3.timeParse('%M:%S');
+let parseYear = d3.timeParse('%Y')
+
 d3.json('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/cyclist-data.json')
   .then(function (data) {
 
     const xScale = d3
-      .scaleLinear()
-      .domain([d3.min(data, (d) => d.Year), d3.max(data, (d) => d.Year)])
+      .scaleTime()
+      .domain([d3.min(data, (d) => parseYear(d.Year)), d3.max(data, (d) => parseYear(d.Year))])
       .range([p, w - p]);
 
     const yScale = d3
@@ -31,17 +34,18 @@ d3.json('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/mas
       .data(data)
       .enter()
       .append('circle')
-      .attr('cx', (d) => xScale(d.Year))
+      .attr('cx', (d) => xScale(parseYear(d.Year)))
       .attr('cy', (d) => yScale(d.Seconds))
       .attr('r', 5)
       .attr('class', 'dot')
-      .attr('data-xvalue', (d) => xScale(d.Year))
-      .attr('data-yvalue', (d) => yScale(d.Seconds))
+      .attr('data-xvalue', (d) => parseYear(d.Year))
+      .attr('data-yvalue', (d) => parseTime(d.Time))
       .on('mouseover', (d) => {tooltip
         .html(d.Year)
         .style('opacity', '1')
         .style('top', event.pageY - 60 + 'px')
         .style('left', event.pageX - 120 + 'px');
+        tooltip.attr('data-year', parseYear(d.Year));
       })
       .on('mouseout', () => {tooltip
         .style('opacity', '0');
