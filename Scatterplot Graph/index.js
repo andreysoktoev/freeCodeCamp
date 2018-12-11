@@ -17,7 +17,7 @@ const legend = d3
   .select('body')
   .append('svg')
   .attr('width', 165)
-  .attr('height', 30)
+  .attr('height', 35)
   .attr('id', 'legend');
 
 legend
