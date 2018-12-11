@@ -1,5 +1,5 @@
 const w = 640,
-      h = 480,
+      h = 320,
       p = 50;
 
 const svg = d3
@@ -16,8 +16,8 @@ const legendItems = [
 const legend = d3
   .select('body')
   .append('svg')
-  .attr('width', 200)
-  .attr('height', 50)
+  .attr('width', 165)
+  .attr('height', 30)
   .attr('id', 'legend');
 
 legend
@@ -25,8 +25,8 @@ legend
   .data(legendItems)
   .enter()
   .append('circle')
-  .attr('cx', 10)
-  .attr('cy', (d, i) => 10 + i * 20)
+  .attr('cx', 5)
+  .attr('cy', (d, i) => 5 + i * 20)
   .attr('r', 5)
   .style('fill', (d) => d[0]);
 
@@ -35,8 +35,8 @@ legend
   .data(legendItems)
   .enter()
   .append('text')
-  .attr('x', 20)
-  .attr('y', (d, i) => 14 + i * 20)
+  .attr('x', 15)
+  .attr('y', (d, i) => 9 + i * 20)
   .text((d) => d[1]);
 
 let tooltip = d3
@@ -83,13 +83,24 @@ d3.json('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/mas
       .attr('data-yvalue', (d) => parseTime(d.Time).toISOString())
       .on('mouseover', (d) => {
         tooltip
-          .html(d.Year)
+          .html(
+            '<b>' + d.Name + '</b>' +
+            'Time: ' + d.Time + '<br>' +
+            'Place: ' + d.Place + '<br>' +
+            'Year: ' + d.Year + '<br>' +
+            'Nationality: ' + d.Nationality + '<br>' +
+            (d.Doping != '' ? 'Doping: ' + d.Doping : '')
+          )
         .style('opacity', '1')
-        .style('top', event.pageY - 60 + 'px')
-        .style('left', event.pageX - 120 + 'px');
+        .style('z-index', '999')
+        .style('top', event.pageY - 15 - document.getElementById('tooltip').offsetHeight + 'px')
+        .style('left', event.pageX + 15 + 'px');
         tooltip.attr('data-year', parseYear(d.Year));
       })
-      .on('mouseout', () => { tooltip.style('opacity', '0') });
+      .on('mouseout', () => {tooltip
+        .style('opacity', '0')
+        .style('z-index', '-999')
+      });
 
     const xAxis = d3.axisBottom(xScale);
     const yAxis = d3.axisLeft(yScale).tickFormat(timeFormat);
@@ -97,12 +108,14 @@ d3.json('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/mas
     svg
       .append('g')
       .attr('transform', 'translate(0, ' + (h - p) + ')')
+      .attr('class', 'axis')
       .attr('id', 'x-axis')
       .call(xAxis);
 
     svg
       .append('g')
       .attr('transform', 'translate(' + p + ', 0)')
+      .attr('class', 'axis')
       .attr('id', 'y-axis')
       .call(yAxis);
 
