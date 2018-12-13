@@ -10,7 +10,9 @@ d3.json(url).then((data) => {
     h = 12 * (ch + 1) - 1 + 2 * p,
     w = Math.ceil(ds.length/12) * (cw + 1) - 1 + 2 * p,
     minY = d3.min(ds, (d) => d.year),
+    maxY = d3.max(ds, (d) => d.year),
     formatTime = d3.timeFormat("%Y, %B"),
+    parseYear = d3.timeParse('%Y'),
     m = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   
   const svg = d3
@@ -19,6 +21,11 @@ d3.json(url).then((data) => {
     .attr('width', w)
     .attr('height', h);
 
+  const xScale = d3
+    .scaleLinear()
+    .domain([minY, maxY])
+    .range([p, w - p]);
+    
   const yScale = d3
     .scaleLinear()
     .domain([0, m.length])
@@ -62,7 +69,14 @@ d3.json(url).then((data) => {
     });
 
   const
+    xAxis = d3.axisBottom(xScale),
     yAxis = d3.axisLeft(yScale);
+
+  svg
+    .append('g')
+    .attr('transform', 'translate(0, ' + (h - p) + ')')
+    .attr('id', 'x-axis')
+    .call(xAxis);
 
   svg
     .append('g')
