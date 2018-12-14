@@ -17,7 +17,7 @@ h1, p {
   opacity: 0;
   z-index: -999;
   padding: 10px 15px;
-  background: rgba(0, 0, 0, .75);
+  background: rgba(0, 0, 0, .85);
   border-radius: var(--br) var(--br) var(--br) 0;
   box-shadow: 0 1px 4px rgba(0, 0, 0, .5);
   color: transparent;
@@ -25,4 +25,10 @@ h1, p {
   white-space: nowrap;
   overflow: hidden;
   transition: .1s;
+}
+.cell {
+  fill: blueviolet;
+}
+.cell:hover {
+  fill: #282828 !important;
 }
