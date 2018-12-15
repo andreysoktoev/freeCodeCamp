@@ -133,6 +133,6 @@ d3.json('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/mas
       .append('g')
       .attr('transform', 'translate(' + (p.left - 1) + ', ' + lch + ')')
       .call(lxAxis)
-      .call(g => g.select(".domain").remove());
+      .call(g => g.select('.domain').remove());
 
   })
