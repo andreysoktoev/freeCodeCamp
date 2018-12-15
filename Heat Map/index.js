@@ -17,7 +17,7 @@ d3.json('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/mas
       minT = d3.min(ds, (d) => bt + d.variance),
       maxT = d3.max(ds, (d) => bt + d.variance),
       rt = [],
-      colors = ['#ffffcc','#ffeda0','#fed976','#feb24c','#fd8d3c','#fc4e2a','#e31a1c','#bd0026','#800026'],
+      colors = ['#ffffcc', '#ffeda0', '#fed976', '#feb24c', '#fd8d3c', '#fc4e2a', '#e31a1c', '#bd0026', '#800026'],
       x = colors.length,
       m = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
     
@@ -34,7 +34,7 @@ d3.json('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/mas
     const xScale = d3
       .scaleTime()
       .domain([parseYear(minY), parseYear(maxY)])
-      .range([p.left, w - p.right]);
+      .rangeRound([p.left, w - p.right]);
       
     const yScale = d3
       .scaleBand()
@@ -109,13 +109,13 @@ d3.json('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/mas
       .attr('id', 'legend');
 
     const
-      lcw = 116,
+      lcw = Math.round((w - p.left - p.right - colors.length + 1) / colors.length),
+      lw = (lcw + 1) * colors.length - 1,
       lch = 5,
-      lw = ((lcw + 1) * colors.length - 1),
       lxScale = d3
         .scaleLinear()
         .domain([minT, maxT])
-        .range([0, lw]),
+        .rangeRound([0, lw]),
       lxAxis = d3.axisBottom(lxScale).tickValues(rt).tickFormat(d3.format('.2f'));
 
     legend
