@@ -1,6 +1,6 @@
 const
-  us_data = 'https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/counties.json',
-  edu_data = 'https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/for_user_education.json',
+  u = 'https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/counties.json',
+  e = 'https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/for_user_education.json',
   w = 960,
   h = 640,
   path = d3.geoPath();
@@ -17,7 +17,7 @@ const tooltip = d3
   .attr('id', 'tooltip');
 
 Promise
-  .all([us_data, edu_data].map(i => d3.json(i)))
+  .all([u, e].map(i => d3.json(i)))
   .then((results) => {
 
     [us, edu] = results;
