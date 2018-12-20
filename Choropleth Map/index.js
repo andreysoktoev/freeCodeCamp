@@ -1,4 +1,6 @@
 const
+  us_data = 'https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/counties.json',
+  edu_data = 'https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/for_user_education.json',
   w = 960,
   h = 640,
   path = d3.geoPath();
@@ -14,38 +16,42 @@ const tooltip = d3
   .append('div')
   .attr('id', 'tooltip');
 
-d3.json('counties.json').then((us) => {
+Promise
+  .all([us_data, edu_data].map(i => d3.json(i)))
+  .then((results) => {
 
-  svg
-    .append('g')
-    .selectAll('path')
-    .data(topojson.feature(us, us.objects.counties).features)
-    .enter()
-    .append('path')
-    .attr('class', 'county')
-    .attr('d', path)
-    .on('mouseover', (d) => tooltip
-      .style('display', 'inline')
-      .attr('data-education', d.id)
-      .html(d.id)
-    )
-    .on('mouseout', (d) => tooltip
-      .style('display', 'none')
-      .attr('data-education', null)
-      .html(null)
-    );
+    [us, edu] = results;
 
-  svg
-    .append('path')
-    .datum(topojson.mesh(us, us.objects.states, (a, b) => a !== b))
-    .attr('fill', 'none')
-    .attr('stroke', '#282828')
-    .attr('stroke-linejoin', 'round')
-    .attr('d', path);
+    svg
+      .append('g')
+      .selectAll('path')
+      .data(topojson.feature(us, us.objects.counties).features)
+      .enter()
+      .append('path')
+      .attr('class', 'county')
+      .attr('d', path)
+      .on('mouseover', (d) => tooltip
+        .style('display', 'inline')
+        .attr('data-education', d.id)
+        .html(edu.length)
+      )
+      .on('mouseout', (d) => tooltip
+        .style('display', 'none')
+        .attr('data-education', null)
+        .html(null)
+      );
 
-});
+    svg
+      .append('path')
+      .datum(topojson.mesh(us, us.objects.states, (a, b) => a !== b))
+      .attr('fill', 'none')
+      .attr('stroke', '#282828')
+      .attr('stroke-linejoin', 'round')
+      .attr('d', path);
 
-document.body.onmousemove = () => {
+  });
+
+document.body.onmousemove = (event) => {
   const t = document.getElementById('tooltip');
   t.style.top = event.pageY - 15 - t.offsetHeight + 'px';
   t.style.left = event.pageX + 15 + 'px';
