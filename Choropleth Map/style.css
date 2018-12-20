@@ -16,6 +16,7 @@
 }
 :root {
   background: #282828;
+  --br: 10px;
 }
 body {
   display: flex;
@@ -25,4 +26,23 @@ body {
 h1 {
   font-weight: normal;
   margin-bottom: 0;
+}
+.county {
+  fill: lightsalmon;
+}
+.county:hover {
+  fill: salmon !important;
+}
+#tooltip {
+  display: none;
+  position: absolute;
+  padding: 10px 15px;
+  border-radius: var(--br) var(--br) var(--br) 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .5);
+  background: rgba(0, 0, 0, .75);
+  color: rgba(255, 255, 255, .75);
+  font-size: 11px;
+  line-height: 1.5rem;
+  white-space: nowrap;
+  overflow: hidden;
 }
