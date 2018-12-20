@@ -16,40 +16,38 @@ const tooltip = d3
   .append('div')
   .attr('id', 'tooltip');
 
-Promise
-  .all([u, e].map(i => d3.json(i)))
-  .then((results) => {
+Promise.all([u, e].map(i => d3.json(i))).then((results) => {
 
-    [us, edu] = results;
+  [us, edu] = results;
 
-    svg
-      .append('g')
-      .selectAll('path')
-      .data(topojson.feature(us, us.objects.counties).features)
-      .enter()
-      .append('path')
-      .attr('class', 'county')
-      .attr('d', path)
-      .on('mouseover', (d) => tooltip
-        .style('display', 'inline')
-        .attr('data-education', d.id)
-        .html(edu.length)
-      )
-      .on('mouseout', (d) => tooltip
-        .style('display', 'none')
-        .attr('data-education', null)
-        .html(null)
-      );
+  svg
+    .append('g')
+    .selectAll('path')
+    .data(topojson.feature(us, us.objects.counties).features)
+    .enter()
+    .append('path')
+    .attr('class', 'county')
+    .attr('d', path)
+    .on('mouseover', (d) => tooltip
+      .style('display', 'inline')
+      .attr('data-education', d.id)
+      .html(edu.length)
+    )
+    .on('mouseout', (d) => tooltip
+      .style('display', 'none')
+      .attr('data-education', null)
+      .html(null)
+    );
 
-    svg
-      .append('path')
-      .datum(topojson.mesh(us, us.objects.states, (a, b) => a !== b))
-      .attr('fill', 'none')
-      .attr('stroke', '#282828')
-      .attr('stroke-linejoin', 'round')
-      .attr('d', path);
+  svg
+    .append('path')
+    .datum(topojson.mesh(us, us.objects.states, (a, b) => a !== b))
+    .attr('fill', 'none')
+    .attr('stroke', '#282828')
+    .attr('stroke-linejoin', 'round')
+    .attr('d', path);
 
-  });
+});
 
 document.body.onmousemove = (event) => {
   const t = document.getElementById('tooltip');
