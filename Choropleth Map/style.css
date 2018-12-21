@@ -24,14 +24,13 @@ body {
   align-items: center;
 }
 h1 {
-  font-weight: normal;
   margin-bottom: 0;
 }
 .county {
   fill: lightsalmon;
 }
 .county:hover {
-  fill: salmon !important;
+  fill: #2e2d79 !important;
 }
 #tooltip {
   display: none;
