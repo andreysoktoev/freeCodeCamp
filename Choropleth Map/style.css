@@ -17,11 +17,12 @@ body {
 h1 {
   margin-bottom: 0;
 }
-.county {
-  fill: lightsalmon;
-}
 .county:hover {
   fill: #320078 !important;
+}
+.axis {
+  color: rgba(255, 255, 255, .75);
+  font-size: 9px;
 }
 #tooltip {
   display: none;
@@ -31,7 +32,5 @@ h1 {
   box-shadow: 0 1px 4px rgba(0, 0, 0, .5);
   background: rgba(0, 0, 0, .85);
   font-size: 11px;
-  line-height: 1.5rem;
   white-space: nowrap;
-  overflow: hidden;
 }
