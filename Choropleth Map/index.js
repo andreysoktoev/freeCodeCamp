@@ -27,11 +27,10 @@ Promise.all([u, e].map(i => d3.json(i))).then((results) => {
     r = d3.range(min, max, (max - min) / k),
     colors = d3
       .scaleQuantize()
-      .domain([min, max])
-      .range(["#29ABE2", "#2D98DD", "#3185D9", "#3572D5", "#395FD1", "#3E4CCC", "#4239C8", "#4626C4", "#4A13C0", "#4F00BC"]);
+      .domain([0, 60])
+      .range(["#29ABE2", "#3088DA", "#3866D2", "#3F44CB", "#4722C3", "#4F00BC"]);
 
-  console.log(d3.interpolateBlues(.5));
-
+  console.log(max);
   svg
     .append('g')
     .selectAll('path')

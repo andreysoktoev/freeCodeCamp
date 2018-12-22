@@ -8,7 +8,6 @@
 }
 :root {
   background: #282828;
-  --br: 10px;
 }
 body {
   display: flex;
@@ -22,7 +21,7 @@ h1 {
   fill: lightsalmon;
 }
 .county:hover {
-  fill: #2e2d79 !important;
+  fill: #320078 !important;
 }
 #tooltip {
   display: none;
