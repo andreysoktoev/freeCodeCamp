@@ -1,0 +1,9 @@
+* {
+  color: rgba(255, 255, 255, .75);
+}
+html {
+  background: #282828;
+}
+h1 {
+  margin-bottom: 0;
+}
